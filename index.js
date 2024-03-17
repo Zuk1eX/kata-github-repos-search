@@ -91,7 +91,6 @@ class View {
   }
 
   selectedReposListHandler(event) {
-    console.log(event.target);
     if (event.target.tagName !== "BUTTON") return;
 
     event.target.parentElement.remove();
@@ -103,10 +102,16 @@ class View {
     const repo = this.search.repos.find(
       ({ id }) => id === +event.target.dataset.id
     );
-
     const element = this.createRepoCard(repo);
+
+    this.clearResultList();
     this.selectedReposList.prepend(element);
     this.setSelectedRepos(repo);
+  }
+
+  clearResultList() {
+    this.searchInput.value = "";
+    this.resultBox.classList.add("hidden");
   }
 
   searchInputHandler() {
